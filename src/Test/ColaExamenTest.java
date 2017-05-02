@@ -82,6 +82,12 @@ public class ColaExamenTest<E> {
 
 		}
 		assert (c.size() == 1);
+		Setup();
+		for (int i = 8; i >= 0; i--) {
+			c.add(i);
+		}
+		c.remove(1);
+		assert (c.get(2) == 3);
 	}
 
 	@Test
@@ -110,7 +116,6 @@ public class ColaExamenTest<E> {
 			assert (c.size() == longitudAntigua);
 		}
 	}
-
 
 	@Before
 	public void Setup() {

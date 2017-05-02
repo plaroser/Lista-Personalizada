@@ -38,7 +38,9 @@ public class Cola<E> extends ArrayList<E> {
 	@Override
 	public E remove(int index) throws ElementBlockedException {
 		if (super.size() > 1) {
-			return super.remove(index);
+			E auxE =super.remove(index);
+			super.sort(comparador);
+			return auxE;
 		} else {
 			throw new ElementBlockedException("En la cola siempre tiene que quedar un elemento.");
 		}
