@@ -1,15 +1,12 @@
 package Test;
 
-import static org.junit.Assert.*;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import Exceptions.ColaExcededSizeException;
+import Exceptions.ElementBlockedException;
 import Exceptions.LlevateTuNullDeAquiException;
 import Models.Cola;
 
@@ -36,7 +33,7 @@ public class ColaExamenTest<E> {
 				assert (c.size() == 10);
 				assert (!c.contains(10));
 			}
-			
+
 			try {
 				c.add(null);
 			} catch (LlevateTuNullDeAquiException e) {
@@ -75,16 +72,45 @@ public class ColaExamenTest<E> {
 
 	}
 
-	/*
-	 * @Test public void testClear() { fail("Not yet implemented"); }
-	 * 
-	 * @Test public void testRemoveInt() { fail("Not yet implemented"); }
-	 * 
-	 * @Test public void testAddAllIntCollectionOfQextendsE() {
-	 * fail("Not yet implemented"); }
-	 * 
-	 * @Test public void testRemoveRange() { fail("Not yet implemented"); }
-	 */
+	@Test
+	public void removeSuccess() {
+		for (int i = 0; i < 9; i++) {
+			c.add(i);
+		}
+		for (int i = 8; i > 0; i--) {
+			c.remove(i);
+
+		}
+		assert (c.size() == 1);
+	}
+
+	@Test
+	public void removeFail() {
+		for (int i = 0; i < 9; i++) {
+			c.add(i);
+		}
+		for (int i = 8; i >= 0; i--) {
+			try {
+				c.remove(i);
+			} catch (ElementBlockedException e) {
+				assert (c.size() == 1);
+			}
+		}
+	}
+
+	@Test
+	public void clearFail() {
+		for (int i = 0; i < 9; i++) {
+			c.add(i);
+		}
+		int longitudAntigua = c.size();
+		try {
+			c.clear();
+		} catch (ElementBlockedException e) {
+			assert (c.size() == longitudAntigua);
+		}
+	}
+
 
 	@Before
 	public void Setup() {

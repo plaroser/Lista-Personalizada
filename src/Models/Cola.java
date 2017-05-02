@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import Exceptions.ColaExcededSizeException;
+import Exceptions.ElementBlockedException;
 import Exceptions.LlevateTuNullDeAquiException;
 
 public class Cola<E> extends ArrayList<E> {
@@ -34,7 +35,18 @@ public class Cola<E> extends ArrayList<E> {
 
 	}
 
-	
-	
-	
+	@Override
+	public E remove(int index) throws ElementBlockedException {
+		if (super.size() > 1) {
+			return super.remove(index);
+		} else {
+			throw new ElementBlockedException("En la cola siempre tiene que quedar un elemento.");
+		}
+	}
+
+	@Override
+	public void clear() {
+		throw new ElementBlockedException("En la cola siempre tiene que quedar un elemento.");
+	}
+
 }
